@@ -20,12 +20,7 @@ git clone https://github.com/qdu-bioinfo/qscore.git
 export PATH=”$PATH:$Qscore/bin/”
 source ~/.bashrc
 ```
-#### **c. Compile the source code**
 
-```
-cd flex-meta-storms
-make
-```
 
 # Usage
 ### a. Calculate the optimal configuration of specific habitat
