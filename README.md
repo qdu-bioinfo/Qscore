@@ -26,14 +26,8 @@ git clone https://github.com/qdu-bioinfo/qscore.git
 ```
 cd Qscore
 source install.sh
+make
 ```
-
-#### **c. Configure the environment variables (the default environment variable configuration file is “~/.bashrc”)**
-```
-export PATH=”$PATH:$Qscore/bin/”
-source ~/.bashrc
-```
-
 
 # Usage
 ### a. Calculate the optimal configuration of specific habitat
