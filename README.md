@@ -1,7 +1,14 @@
 # Introduction
 Qscore is a comprehensive method to evaluate the performance of amplicons by integrating the amplification rate, multi-tier taxonomic annotation, sequence type and length. It takes taxonomic annotation and its abundance at any taxonomic level as input, and predicts the optimal configuration of the ecological habitat through a large number of simulated amplification data that we analyze in advance.
 
-# Software Requirements
+# System Requirement and dependency
+## Hardware Requirements
+Qscore only requires a standard computer with sufficient RAM to support the operations defined by a user. For typical users, this would be a computer with about 2 GB of RAM. For optimal performance, we recommend a computer with the following specs:
+
+  RAM: 8+ GB  
+  CPU: 4+ cores
+
+## Software Requirements
 The package depends C++ (>= 4.8.2) we recommend using the Homebrew package manager:
 ```
 brew install gcc
@@ -10,12 +17,18 @@ brew install gcc
 We recommend it directly at [Qscore Online](http://qscore.single-cell.cn/)
 
 # Installation guide
+## Automatic Installation (recommended)
 #### **a. Download the package**
 ```
 git clone https://github.com/qdu-bioinfo/qscore.git	
 ```
+#### **b. Install by installer**
+```
+cd Qscore
+source install.sh
+```
 
-#### **b. Configure the environment variables (the default environment variable configuration file is “~/.bashrc”)**
+#### **c. Configure the environment variables (the default environment variable configuration file is “~/.bashrc”)**
 ```
 export PATH=”$PATH:$Qscore/bin/”
 source ~/.bashrc
@@ -37,7 +50,7 @@ p__Firmicutes;	751
 ```
 Qscore -D R -i taxonomy.abd -W 1 1 1 -o optimal_configure.txt
 ```
-Here taxonomy.abd is a taxonomic annotation file at any level with abundance, and optimal_configure.txt is the output file. Then choose the reference database (R: NCBI RefSeq, G: Greengenes cut-off 0.97, C: Greengenes cut-off 0.99, S: Silva), and the weight of different evaluation indicators (Senstivity: Wprecision: Cost, default is 1:1:1) according to the user's preferences.
+Here taxonomy.abd is a taxonomic annotation file at any level with abundance, and optimal_configure.txt is the output file. Then choose the reference database (R: NCBI RefSeq, G: GreenGenes-13-8, C: GreenGenes-13-8-99, S: Silva), and the weight of different evaluation indicators (Senstivity: Wprecision: Cost, default is 1:1:1) according to the user's preferences.
 
 ### b. Simulate the second generation 16S rRNA sequencing data or shotgun sequencing
 Here we provide the method of generating 16S rRNA sequencing data and shotgun sequencing data based on the full-length metagenome sequence
