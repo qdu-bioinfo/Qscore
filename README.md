@@ -3,7 +3,7 @@ Qscore is a comprehensive method to evaluate the performance of amplicons by int
 
 # Software Requirements
 The package depends C++ (>= 4.8.2) we recommend using the Homebrew package manager:
-~brew install gcc~ 
+·brew install gcc·
 
 # Online service
 We recommend it directly at [Qscore Online](http://qscore.single-cell.cn/)
