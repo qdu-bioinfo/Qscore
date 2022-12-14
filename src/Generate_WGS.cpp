@@ -186,13 +186,15 @@ void Write_OTU_list(string& filepath, vector<OTUs>& otu_list) {
 
 	FILE* fp;
 	string write_file_path = "";
+	string command="mkdir -p "+ filepath;
+	system(command.c_str());
 
 	if (write_type == "F") {
-		write_file_path = filepath + ".fq";
+		write_file_path = filepath + "/WGS" + "_"+to_string(Sequence_length) + "bp.fq";
 	}
 	else {
-		write_file_path = filepath + ".fa";
-	}
+			write_file_path = filepath + "/WGS" + "_"+to_string(Sequence_length)+ "bp.fa";
+		}
 
 	if ((fp = fopen(write_file_path.c_str(), "a")) == NULL)
 	{

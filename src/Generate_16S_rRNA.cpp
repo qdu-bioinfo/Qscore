@@ -17,7 +17,7 @@ int Sequence_length = 300;
 int Mode = 0;
 string direction = "T";
 string write_type = "T";
-string read_path = "", write_path = "Generate_16S";
+string read_path = "", write_path = "Generate_16S/";
 
 
 
@@ -264,15 +264,20 @@ public:
 
 
 void Write_OTU_list(string& filepath, vector<OTU_16S>& otu_list) {
+
 	string region[13] = { "v1","v3","v4","v5","v6","v7",
 		"v2_R","v3_R","v4_R","v5_R","v6_R","v8_R","v9_R" };
 	string write_path;
+
+	string command="mkdir -p "+ filepath;
+	system(command.c_str());
+
 	for (int i = 0; i < 13; i++) {
 		if (write_type == "F") {
-			write_path = filepath + region[i] + ".fq";
+			write_path = filepath + "/" + region[i] + "_"+to_string(Sequence_length) + "bp.fq";
 		}
 		else {
-			write_path = filepath + region[i] + ".fa";
+			write_path = filepath + "/" + region[i] + "_"+to_string(Sequence_length)+ "bp.fa";
 		}
 
 		FILE* fp;
