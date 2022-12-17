@@ -25,8 +25,8 @@ string read_path = "", write_path = "Generate_16S/";
 vector<string> split(const string& str, const string& delim) {
 	vector<string> res;
 	if ("" == str) return res;
-
-	char* strs = new char[str.length() + 1];
+	//先将要切割的字符串从string类型转换为char*类型
+	char* strs = new char[str.length() + 1]; //不要忘了
 	strcpy(strs, str.c_str());
 
 	char* d = new char[delim.length() + 1];
@@ -34,8 +34,8 @@ vector<string> split(const string& str, const string& delim) {
 
 	char* p = strtok(strs, d);
 	while (p) {
-		string s = p;
-		res.push_back(s);
+		string s = p; //分割得到的字符串转换为string类型
+		res.push_back(s); //存入结果数组
 		p = strtok(NULL, d);
 	}
 
@@ -84,7 +84,7 @@ public:
 
 };
 
-void otu_add_errs(OTUs& OTUs_temp, int& region) {
+void otu_add_errs(OTUs& OTUs_temp,int& region) {
 	/*	Qvalue = 37 - 1.8 * 10^(-4) * i^2
 	*	90% replace error
 	*	10%	insert or delete error
@@ -197,10 +197,10 @@ void otu_add_errs(OTUs& OTUs_temp, int& region) {
 			}
 
 		}
-
+		
 	}
 
-
+	
 
 }
 
@@ -263,35 +263,21 @@ public:
 
 
 
-void Write_OTU_list(string& filepath, vector<OTU_16S>& otu_list,multimap<string,int>& Gene_id_list) {
+void Write_OTU_list(string& filepath, vector<OTU_16S>& otu_list) {
 
 	string region[13] = { "v1","v3","v4","v5","v6","v7",
 		"v2_R","v3_R","v4_R","v5_R","v6_R","v8_R","v9_R" };
-	string write_path = filepath + "/16S_rRNA_gene_list.txt";
+	string write_path;
 
-	string command = "mkdir -p " + filepath;
+	string command="mkdir -p "+ filepath;
 	system(command.c_str());
-
-	FILE* fp;
-	int count_num = 0;
-	if ((fp = fopen(write_path.c_str(), "a")) == NULL)
-	{
-		printf("Open Failed.\n");
-		return;
-	}
-	else {
-		for (multimap<string, int>::iterator it = Gene_id_list.begin(); it != Gene_id_list.end(); it++) {
-			fprintf(fp, "%s_site:_%d\n", it->first.c_str(), it->second);
-		}
-
-	}
 
 	for (int i = 0; i < 13; i++) {
 		if (write_type == "F") {
-			write_path = filepath + "/" + region[i] + "_" + to_string(Sequence_length) + "bp.fq";
+			write_path = filepath + "/" + region[i] + "_"+to_string(Sequence_length) + "bp.fq";
 		}
 		else {
-			write_path = filepath + "/" + region[i] + "_" + to_string(Sequence_length) + "bp.fa";
+			write_path = filepath + "/" + region[i] + "_"+to_string(Sequence_length)+ "bp.fa";
 		}
 
 		FILE* fp;
@@ -310,7 +296,7 @@ void Write_OTU_list(string& filepath, vector<OTU_16S>& otu_list,multimap<string,
 					OTUs OTUs_temp;
 					OTUs_temp.OTUs_id = it->OTU_num;
 					OTUs_temp.OTUs_seq = it->seqs[i];
-					otu_add_errs(OTUs_temp, i);
+					otu_add_errs(OTUs_temp,i);
 					fprintf(fp, ">%s\n%s\n", OTUs_temp.OTUs_id.c_str(), OTUs_temp.OTUs_seq.substr(0, Sequence_length).c_str());
 					if (write_type == "F") {
 						fprintf(fp, "+\r\n");
@@ -318,7 +304,7 @@ void Write_OTU_list(string& filepath, vector<OTU_16S>& otu_list,multimap<string,
 							if (i < 6)
 								fprintf(fp, "%c", (int)(70 - 0.000188 * (j) * (j)+0.5));
 							else
-								fprintf(fp, "%c", (int)(66 - 0.000188 * (Sequence_length - j) * (Sequence_length - j) + 0.5));
+								fprintf(fp, "%c", (int)(66 - 0.000188 * (Sequence_length-j) * (Sequence_length - j) +0.5));
 						}
 
 						fprintf(fp, "\r\n");
@@ -388,7 +374,7 @@ int Parse_Para(int argc, char* argv[]) {
 
 		case 's': Sequence_length = stringToNum<int>(argv[i + 1]); break;
 
-		case 'f': write_type = argv[i + 1]; break;
+		case 'f': write_type = argv[i + 1]; break;		
 
 		case 'h': printhelp(); break;
 
@@ -410,13 +396,12 @@ void Generate_16S_specimen() {
 	srand(time(NULL));
 	string seq_Pri[13] = { "AGAGTTTGAT[CT][AC]TGGCTCAG","CCTACGGG[ATCG]GGC[AT]GCAG","GTG[CT]CAGC[AC]GCCGCGGTAA","TAGATACCC[ACTG][CG]GTAGTCC","CAACGCGAAGAACCTTACC","G[CT]AACGAGCGCAACCC",
 		"TACGG[AG]AGGCAGCAG","GTGCCAGC[CA]GCCGCGGTAA","ATTAGA[AT]ACCC[TCG][ATGC]GTAGTCC","AAACT[TC]AAA[TG][AG]AATTG[AG]CGG","AGGTG[ATCG]TGCATGG[TC][TC]GTCG","TG[TC]AC[AT]CAC[TC]GCCCGTC","AAGTCGTAACAAGGTA" };
-
+		
 	string region[13] = { "v1","v3","v4","v5","v6","v7",
 		"v2_R","v3_R","v4_R","v5_R","v6_R","v8_R","v9_R" };
 	int site[13] = { 0,341,515,789,967,1099,357,518,806,926,1064,1406,1492 };
 
 	vector<OTUs> database;
-	multimap<string,int> Gene_id_list;
 
 	OTU_16S otu_temp;
 	vector<OTU_16S> OTU_list;
@@ -433,7 +418,7 @@ void Generate_16S_specimen() {
 				while (found = regex_search(seqs_temp, m, is_Pri)) {
 					otu_temp.site[i] = db_it->OTUs_seq.length() - m.suffix().str().length();
 					if (i < 6) {
-
+						
 						otu_temp.seqs[i] = m.str() + m.suffix().str().substr(0, Sequence_length + 50);
 					}
 					else {
@@ -442,25 +427,9 @@ void Generate_16S_specimen() {
 							pos = 0;
 						otu_temp.seqs[i] = m.prefix().str().substr(pos, Sequence_length + 50) + m.str();
 					}
-
+					
 					otu_temp.OTU_num = db_it->OTUs_id + "_site:_" + to_string(otu_temp.site[i]);
 					OTU_list.push_back(otu_temp);
-					multimap<string, int>::iterator gl_it_beg = Gene_id_list.lower_bound(db_it->OTUs_id);
-					multimap<string, int>::iterator gl_it_end = Gene_id_list.upper_bound(db_it->OTUs_id);
-					if (gl_it_beg != Gene_id_list.end()) {
-						bool flag = true;
-						for (; gl_it_beg != gl_it_end; gl_it_beg++) {
-							if (gl_it_beg->second - otu_temp.site[i] < 1500) {
-								flag = false;
-								break;
-							}								
-						}
-						if (flag == true)
-							Gene_id_list.insert(pair<string, int>(db_it->OTUs_id, otu_temp.site[i]));
-					}
-					else
-						Gene_id_list.insert(pair<string, int>(db_it->OTUs_id, otu_temp.site[i]));
-
 					otu_temp.clear();
 					otu_count++;
 					seqs_temp = m.suffix().str();
@@ -468,10 +437,9 @@ void Generate_16S_specimen() {
 				}
 			}
 		}
-		Write_OTU_list(write_path, OTU_list,Gene_id_list);
+		Write_OTU_list(write_path, OTU_list);
 		database.clear();
 		OTU_list.clear();
-		Gene_id_list.clear();
 	}
 	else if (Mode == 2) {
 		vector<string> read_path_list;
@@ -502,7 +470,7 @@ void Generate_16S_specimen() {
 					string seqs_temp = db_it->OTUs_seq;
 					int otu_count = 1;
 					while (found = regex_search(seqs_temp, m, is_Pri)) {
-
+						
 						otu_temp.site[i] = db_it->OTUs_seq.length() - m.suffix().str().length();
 						if (i < 6) {
 
@@ -514,24 +482,9 @@ void Generate_16S_specimen() {
 								pos = 0;
 							otu_temp.seqs[i] = m.prefix().str().substr(pos, Sequence_length + 50) + m.str();
 						}
-
+						
 						otu_temp.OTU_num = db_it->OTUs_id + "_site:_" + to_string(otu_temp.site[i]);
 						OTU_list.push_back(otu_temp);
-						multimap<string, int>::iterator gl_it_beg = Gene_id_list.lower_bound(db_it->OTUs_id);
-						multimap<string, int>::iterator gl_it_end = Gene_id_list.upper_bound(db_it->OTUs_id);
-						if (gl_it_beg != Gene_id_list.end()) {
-							bool flag = true;
-							for (; gl_it_beg != gl_it_end; gl_it_beg++) {
-								if (gl_it_beg->second - otu_temp.site[i] < 1500) {
-									flag = false;
-									break;
-								}
-							}
-							if (flag == true)
-								Gene_id_list.insert(pair<string, int>(db_it->OTUs_id, otu_temp.site[i]));
-						}
-						else
-							Gene_id_list.insert(pair<string, int>(db_it->OTUs_id, otu_temp.site[i]));
 						otu_temp.clear();
 						otu_count++;
 						seqs_temp = m.suffix().str();
@@ -540,7 +493,7 @@ void Generate_16S_specimen() {
 				}
 			}
 
-			Write_OTU_list(write_path, OTU_list, Gene_id_list);
+			Write_OTU_list(write_path, OTU_list);
 			database.clear();
 			OTU_list.clear();
 		}

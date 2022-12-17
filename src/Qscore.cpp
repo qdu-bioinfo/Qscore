@@ -12,6 +12,8 @@
 #include<sys/stat.h>
 #include<omp.h>
 #include<string.h>
+#include <stdio.h>
+#include <unistd.h>
 using namespace std;
 
 
@@ -147,12 +149,15 @@ int Parse_Para(int argc, char* argv[]) {
 
 void Read_Score_tables(map<string, Score_table>& score_table) {
 	string filepath;
+
+	string str_url = getenv("Qscore");
+
 	switch (Ref_db) {
-	case 'G': filepath = "../Database/" + Mode + "/GG_13.txt"; break;
-	case 'Q': filepath = "../Database/" + Mode + "/ncbi_refseq.txt"; break;
-	case 'C': filepath = "../Database/" + Mode + "/GG_13_99.txt"; break;
-	case 'S': filepath = "../Database/" + Mode + "/silva_16s.txt"; break;
-	default:  filepath = "../Database/" + Mode + "/ncbi_refseq.txt"; break;
+	case 'G': filepath = str_url + "/Database/" + Mode + "/GG_13.txt"; break;
+	case 'Q': filepath = str_url + "/Database/" + Mode + "/ncbi_refseq.txt"; break;
+	case 'C': filepath = str_url + "/Database/" + Mode + "/GG_13_99.txt"; break;
+	case 'S': filepath = str_url + "/Database/" + Mode + "/silva_16s.txt"; break;
+	default:  filepath = str_url + "/Database/" + Mode + "/ncbi_refseq.txt"; break;
 	}
 	ifstream infile;
 	infile.open(filepath.c_str(), ios::in);
