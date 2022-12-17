@@ -219,7 +219,7 @@ void Read_Taxonomy_list(string& filepath, map<string, double>& taxonomy_list) {
 	infile.close();
 }
 
-//Ð´ÈëÎÄµµ
+
 void write_score(string filepath, double senstivity[32], double acc[32], double Qscore[32]) {
 	FILE* fp;
 
@@ -271,9 +271,9 @@ void write_score(string filepath, double senstivity[32], double acc[32], double 
 void Qscore_mode(int length[32], double senstivity[32], double Wprecision[32], double value[32], map<string, double>& taxonomy_list, map<string, double>& unmap_taxonomy_list, map<string, Score_table>& score_table) {
 	double sum_abu = 0;
 	for (map<string, double>::iterator tl_it = taxonomy_list.begin(); tl_it != taxonomy_list.end(); tl_it++) {
+		sum_abu += tl_it->second;
 		map<string, Score_table>::iterator sco_it = score_table.find(tl_it->first);
-		if (sco_it != score_table.end()) {
-			sum_abu += tl_it->second;
+		if (sco_it != score_table.end()) {			
 			for (int i = 0; i < 32; i++) {
 				if (sco_it->second.senstivity[i] != 0) {
 					senstivity[i] += (sco_it->second.senstivity[i] * tl_it->second);
