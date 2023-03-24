@@ -1,0 +1,22 @@
+#Here we provide a demo test.
+#
+#File description
+#taxonomy.abd: is a taxonomic annotation file with abundance of specific habitat.
+#genome.fa: is a full-length genome sequence(fasta file)
+#
+#To run the demo, you can either 
+#
+#sh Readme
+#
+#or
+#type the following commands. 
+#
+#Commands:
+#Predict the optimal configuration of specific habitats
+Qscore -i taxonomy.abd -o optimal_configure.txt
+#
+#Generate simulate 16S rRNA sequencing data by primers extract from genome 
+Extraxt_16S_rRNA -i genome.fa -o 16S
+#
+#Generate WGS sequencing data by slider window 
+Extraxt_WGS -i genome.fa -o WGS
