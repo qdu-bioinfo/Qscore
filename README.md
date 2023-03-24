@@ -50,10 +50,10 @@ Here taxonomy.abd is a taxonomic annotation file at any level with abundance, an
 Here we provide the method of generating 16S rRNA sequencing data and shotgun sequencing data based on the full-length metagenome sequence
 16S rRNA sequencing：
 ```
-Generate_16S_rRNA -i genome.fa -o 16S_rRNA
+Extract_16S_rRNA -i genome.fa -o 16S_rRNA
 ```
 shotgun sequencing:
 ```
-Generate_WGS -i genome.fa -o WGS
+Extract_WGS -i genome.fa -o WGS
 ```
 Here genome.fa is a full-length metagenome sequence. These simulated sequences can also be used to test the accuracy of Qscore prediction through [NCBI-opal](https://pubmed.ncbi.nlm.nih.gov/34837585/)
