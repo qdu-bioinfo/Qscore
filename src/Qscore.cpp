@@ -21,7 +21,7 @@ char Ref_db;
 string Mode;
 double weight[3] = { 1,1,1 };
 string taxonomy_list_path = "";
-string Qscore_path = "";
+string Qscore_path = "Qscore.txt";
 
 
 
@@ -91,7 +91,7 @@ void printhelp() {
 	//printf("\t  -R If the input table is reversed, T(rue) or F(alse), default is false [Optional for -T]");
 
 	printf("\t[Output options]\r\n");
-	printf("\t  -o Output file, default is to output on screen\r\n");
+	printf("\t  -o Output file, default is Qscore.txt\r\n");
 
 	printf("\t[Other options]\r\n");
 	printf("\t  -w alignment, Wprecision and cost weighted, default is 1 1 1\r\n");
@@ -105,7 +105,7 @@ int Parse_Para(int argc, char* argv[]) {
 
 	Ref_db = 'R';
 
-	Qscore_path = "example/Qscore.txt";
+	Qscore_path = "Qscore.txt";
 
 
 
@@ -224,7 +224,7 @@ void write_score(string filepath, double senstivity[32], double acc[32], double 
 	FILE* fp;
 
 	if ((fp = fopen(filepath.c_str(), "a")) == NULL) {
-		printf("Open Failed.\n");
+		printf("Can not open %s.\n",filepath.c_str());
 		return;
 	}
 	else {

@@ -16,7 +16,7 @@
 Qscore -i taxonomy.abd -o optimal_configure.txt
 #
 #Generate simulate 16S rRNA sequencing data by primers extract from genome 
-Generate_16S_rRNA -i genome.fa -o 16S
+Extraxt_16S_rRNA -i genome.fa -o 16S
 #
 #Generate WGS sequencing data by slider window 
-Generate_WGS -i genome.fa -o WGS
+Extraxt_WGS -i genome.fa -o WGS
