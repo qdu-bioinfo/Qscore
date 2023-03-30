@@ -49,7 +49,7 @@ Qscore -D R -i taxonomy.abd -W 1 1 1 -o optimal_configure.txt
 ```
 Here taxonomy.abd is a taxonomic annotation file at any level with abundance, and optimal_configure.txt is the output file. Then choose the reference database (R: NCBI RefSeq, G: GreenGenes-13-8, C: GreenGenes-13-8-99, S: Silva), and the weight of different evaluation indicators (Senstivity: Wprecision: Cost, default is 1:1:1) according to the user's preferences.
 
-### b. Simulate the second generation 16S rRNA sequencing data or shotgun sequencing
+### b. Simulate the next-generation 16S rRNA sequencing data or shotgun sequencing
 Here we provide the method of generating 16S rRNA sequencing data and shotgun sequencing data based on the full-length metagenome sequence
 ### 16S rRNA sequencing：
 You can run this following command to get detailed parameters.
