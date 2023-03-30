@@ -48,11 +48,21 @@ Here taxonomy.abd is a taxonomic annotation file at any level with abundance, an
 
 ### b. Simulate the second generation 16S rRNA sequencing data or shotgun sequencing
 Here we provide the method of generating 16S rRNA sequencing data and shotgun sequencing data based on the full-length metagenome sequence
-16S rRNA sequencing：
+# 16S rRNA sequencing：
+You can run this following command to get detailed parameters.
+```
+Extract_16S_rRNA -h
+```
+And this following command provide a demo to get all 16S rRNA (default 300bp) of primer extract from a full-length metagenome sequence file. 
 ```
 Extract_16S_rRNA -i genome.fa -o 16S_rRNA
 ```
-shotgun sequencing:
+# Shotgun sequencing:
+You can run this following command to get detailed parameters.
+```
+Extract_WGS -h
+```
+And this following command provide a demo to get a simulated genome sequencing specimen of use silider window extract from a full-length metagenome sequence file. 
 ```
 Extract_WGS -i genome.fa -o WGS
 ```
