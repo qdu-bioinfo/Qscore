@@ -26,7 +26,6 @@ git clone https://github.com/qdu-bioinfo/qscore.git
 ```
 cd Qscore
 source install.sh
-make
 ```
 
 # Usage
