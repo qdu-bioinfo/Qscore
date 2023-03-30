@@ -62,7 +62,7 @@ You can run this following command to get detailed parameters.
 ```
 Extract_WGS -h
 ```
-And this following command provide a demo to get a simulated genome sequencing specimen of use silider window extract from a full-length metagenome sequence file. 
+And this following command provide a demo to get a simulated genome sequencing specimen (300bp) of use silider window extract from a full-length metagenome sequence file. 
 ```
 Extract_WGS -i genome.fa -o WGS
 ```
