@@ -31,6 +31,10 @@ make
 
 # Usage
 ### a. Calculate the optimal configuration of specific habitat
+You can run this following command to get detailed parameters.
+```
+Qscore -h
+```
 Calculate Qscore needs input a habitat with taxonomy annotation and abundance (required)，such as
 ```
 #Taxonomy	Count
